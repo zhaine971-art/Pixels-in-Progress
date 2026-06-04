@@ -1,0 +1,221 @@
+/* HEADER */
+header {
+    background-color: rgba(120, 180, 255, 0.35);
+    backdrop-filter: blur(6px);
+    padding: 1px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* NAVIGATION */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* BANNER */
+.banner {
+    width: 100%;
+    height: 450px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* CONTENT BOX */
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(159, 200, 255, 0.95);
+    border-radius: 10px;
+}
+
+/* BACKGROUND */
+body {
+    background-image: url("../images/python-code.webp");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+main {
+    padding: 40px 20px;
+}
+
+/* CENTER FIGURES */
+figure {
+    text-align: center;
+}
+
+figure img {
+    display: inline-block;
+}
+
+/* DUAL SECTION HEADER WRAPPER */
+.dual-section-header {
+    display: flex;
+    align-items: center;
+    margin: 50px 0 20px 0;
+    gap: 40px;
+}
+
+/* INDIVIDUAL SECTION HEADER */
+.section-header {
+    display: flex;
+    align-items: center;
+}
+
+/* Latest Posts stays left */
+.section-header.left {
+    flex: 1;
+}
+
+/* Spotlight shifts left */
+.section-header.right {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+/* LABEL BUTTON */
+.section-header span {
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+/* LEFT SIDE LINE */
+.section-header.left::after {
+    content: "";
+    flex-grow: 1;
+    height: 2px;
+    background-color: black;
+    margin-left: 12px;
+}
+
+/* RIGHT SIDE LINE */
+.section-header.right::after {
+    content: "";
+    flex-grow: 1;
+    height: 2px;
+    background-color: black;
+    margin-left: 12px;
+}
+
+/* Remove opposite lines */
+.section-header.left::before,
+.section-header.right::before {
+    content: none;
+}
+
+/* TWO-COLUMN LAYOUT FOR POSTS + SPOTLIGHT */
+.posts-spotlight-wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+/* LEFT COLUMN */
+.latest-posts {
+    flex: 1;
+}
+
+/* RIGHT COLUMN */
+.spotlight-content {
+    flex: 1;
+}
+
+/* Latest Posts with thumbnails */
+.post-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.post-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.post-item h3 {
+    margin: 0;
+}
+
+.post-item p {
+    margin-top: 5px;
+}
+
+/* FLOATING IMAGE FOR BLOG POSTS */
+.float-left {
+    float: left;
+    width: 180px;              /* slightly smaller */
+    margin: 5px 20px 15px 0;   /* tighter spacing */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* CODE BLOCK SPACING */
+pre {
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    width: fit-content;     /* THIS is the magic */
+    max-width: 100%;        /* prevents overflow */
+}
+
+
+/* CODE BLOCK STYLE */
+pre code {
+    display: block;
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+    padding: 5px;
+    border-radius: 8px;
+    font-family: Consolas, monospace;
+    font-size: 0.9rem;
+    max-width: 600px;          /* slightly wider but still compact */
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.4;
+}
+
