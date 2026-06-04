@@ -21,6 +21,23 @@ header {
 }
 
 /* ============================
+   FOOTER
+============================ */
+footer {
+    color: black;
+}
+
+footer p {
+    color: black;
+}
+
+footer nav a {
+    color: black !important;
+    text-decoration: none;
+}
+
+
+/* ============================
    NAVIGATION
 ============================ */
 nav {
@@ -82,6 +99,14 @@ nav a:hover::after {
     background-color: rgba(159, 200, 255, 0.95);
     border-radius: 10px;
 }
+.content-container h1 {
+    text-align: center;
+}
+
+.content-container h2 {
+    text-align: center;
+}
+
 
 main {
     padding: 40px 20px;
@@ -251,7 +276,7 @@ pre code {
         width: 100%;
         margin: 0 auto 15px auto;
     }
-    
+
 	.about-img {
     width: 100% !important;
     max-width: 100% !important;
