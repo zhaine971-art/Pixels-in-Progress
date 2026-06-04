@@ -1,4 +1,18 @@
-/* HEADER */
+/* ============================
+   GLOBAL RESET & BASE
+============================ */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("../images/python-code.webp");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* ============================
+   HEADER
+============================ */
 header {
     background-color: rgba(120, 180, 255, 0.35);
     backdrop-filter: blur(6px);
@@ -6,7 +20,9 @@ header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* NAVIGATION */
+/* ============================
+   NAVIGATION
+============================ */
 nav {
     display: flex;
     justify-content: center;
@@ -36,7 +52,9 @@ nav a:hover::after {
     width: 100%;
 }
 
-/* BANNER */
+/* ============================
+   BANNER
+============================ */
 .banner {
     width: 100%;
     height: 450px;
@@ -54,7 +72,9 @@ nav a:hover::after {
     display: block;
 }
 
-/* CONTENT BOX */
+/* ============================
+   CONTENT CONTAINER
+============================ */
 .content-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -63,19 +83,13 @@ nav a:hover::after {
     border-radius: 10px;
 }
 
-/* BACKGROUND */
-body {
-    background-image: url("../images/python-code.webp");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-}
-
 main {
     padding: 40px 20px;
 }
 
-/* CENTER FIGURES */
+/* ============================
+   FIGURES
+============================ */
 figure {
     text-align: center;
 }
@@ -84,7 +98,9 @@ figure img {
     display: inline-block;
 }
 
-/* DUAL SECTION HEADER WRAPPER */
+/* ============================
+   SECTION HEADERS
+============================ */
 .dual-section-header {
     display: flex;
     align-items: center;
@@ -92,24 +108,20 @@ figure img {
     gap: 40px;
 }
 
-/* INDIVIDUAL SECTION HEADER */
 .section-header {
     display: flex;
     align-items: center;
 }
 
-/* Latest Posts stays left */
 .section-header.left {
     flex: 1;
 }
 
-/* Spotlight shifts left */
 .section-header.right {
     flex: 1;
     justify-content: flex-start;
 }
 
-/* LABEL BUTTON */
 .section-header span {
     background-color: black;
     color: white;
@@ -120,16 +132,7 @@ figure img {
     white-space: nowrap;
 }
 
-/* LEFT SIDE LINE */
-.section-header.left::after {
-    content: "";
-    flex-grow: 1;
-    height: 2px;
-    background-color: black;
-    margin-left: 12px;
-}
-
-/* RIGHT SIDE LINE */
+.section-header.left::after,
 .section-header.right::after {
     content: "";
     flex-grow: 1;
@@ -138,29 +141,25 @@ figure img {
     margin-left: 12px;
 }
 
-/* Remove opposite lines */
-.section-header.left::before,
-.section-header.right::before {
-    content: none;
-}
-
-/* TWO-COLUMN LAYOUT FOR POSTS + SPOTLIGHT */
+/* ============================
+   POSTS + SPOTLIGHT LAYOUT
+============================ */
 .posts-spotlight-wrapper {
     display: flex;
     gap: 40px;
 }
 
-/* LEFT COLUMN */
 .latest-posts {
     flex: 1;
 }
 
-/* RIGHT COLUMN */
 .spotlight-content {
     flex: 1;
 }
 
-/* Latest Posts with thumbnails */
+/* ============================
+   POST ITEMS
+============================ */
 .post-item {
     display: flex;
     align-items: flex-start;
@@ -184,27 +183,29 @@ figure img {
     margin-top: 5px;
 }
 
-/* FLOATING IMAGE FOR BLOG POSTS */
+/* ============================
+   FLOATING IMAGES IN POSTS
+============================ */
 .float-left {
     float: left;
-    width: 180px;              /* slightly smaller */
-    margin: 5px 20px 15px 0;   /* tighter spacing */
+    width: 180px;
+    margin: 5px 20px 15px 0;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-/* CODE BLOCK SPACING */
+/* ============================
+   CODE BLOCKS
+============================ */
 pre {
     margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
     clear: both;
-    width: fit-content;     /* THIS is the magic */
-    max-width: 100%;        /* prevents overflow */
+    width: fit-content;
+    max-width: 100%;
 }
 
-
-/* CODE BLOCK STYLE */
 pre code {
     display: block;
     background-color: #1e1e1e;
@@ -213,9 +214,88 @@ pre code {
     border-radius: 8px;
     font-family: Consolas, monospace;
     font-size: 0.9rem;
-    max-width: 600px;          /* slightly wider but still compact */
+    max-width: 600px;
     overflow-x: auto;
     white-space: pre;
     line-height: 1.4;
 }
 
+/* ============================
+   MOBILE OPTIMIZATION
+============================ */
+@media (max-width: 600px) {
+
+    /* NAV */
+    nav {
+        gap: 20px;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding-bottom: 3px;
+    }
+
+    /* BANNER */
+    .banner {
+        height: 220px;
+    }
+
+    .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* CONTENT */
+    .content-container {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    main {
+        padding: 20px 10px;
+    }
+
+    /* SECTION HEADERS */
+    .dual-section-header {
+        flex-direction: column;
+        gap: 10px;
+        margin: 30px 0 15px 0;
+    }
+
+    .section-header span {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    /* POSTS + SPOTLIGHT */
+    .posts-spotlight-wrapper {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .post-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* FLOATING IMAGES */
+    .float-left {
+        float: none;
+        display: block;
+        margin: 0 auto 15px auto;
+        width: 90%;
+    }
+
+    /* CODE BLOCKS */
+    pre {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    pre code {
+        font-size: 0.8rem;
+        max-width: 100%;
+    }
+}
