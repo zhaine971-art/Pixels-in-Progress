@@ -221,16 +221,24 @@ pre code {
 }
 
 .about-img {
-	max-width: 100%;
-	height: auto;
-	display: block;
-	margin: 0 auto; 
+    width: 400px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
 }
+
 
 /* ============================
    MOBILE OPTIMIZATION
 ============================ */
 @media (max-width: 600px) {
+
+	.about-img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+	}
 
     /* BACKGROUND FIX */
     body {
