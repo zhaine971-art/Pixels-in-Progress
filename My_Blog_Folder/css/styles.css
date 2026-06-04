@@ -263,17 +263,28 @@ pre code {
         padding: 20px 10px;
     }
 
-    /* SECTION HEADERS — FIXED */
+    /* ============================
+       SECTION HEADERS — FIXED ORDER
+    ============================ */
+
+    /* Stack the two headers vertically */
     .dual-section-header {
-        flex-direction: column;      /* stack vertically */
-        align-items: flex-start;     /* left-align */
+        flex-direction: column;
+        align-items: flex-start;
         gap: 15px;
         margin: 30px 0 15px 0;
     }
 
-    /* Remove forced stretching */
-    .section-header.left,
+    /* Force correct stacking order */
+    .section-header.left {
+        order: 1; /* Latest Posts first */
+        flex: none;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
     .section-header.right {
+        order: 2; /* Spotlight second */
         flex: none;
         width: 100%;
         justify-content: flex-start;
@@ -290,7 +301,9 @@ pre code {
         padding: 6px 12px;
     }
 
-    /* POSTS + SPOTLIGHT */
+    /* ============================
+       POSTS + SPOTLIGHT CONTENT
+    ============================ */
     .posts-spotlight-wrapper {
         flex-direction: column;
         gap: 25px;
@@ -321,4 +334,5 @@ pre code {
         max-width: 100%;
     }
 }
+
 
