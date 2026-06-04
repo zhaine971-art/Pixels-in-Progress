@@ -195,6 +195,18 @@ figure img {
 }
 
 /* ============================
+   FLOATING CODE BLOCKS
+============================ */
+.float-right-code {
+    float: right;
+    width: 45%;                /* keeps it compact */
+    margin: 5px 0 15px 20px;   /* space between text and code */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+
+/* ============================
    CODE BLOCKS
 ============================ */
 pre {
@@ -233,7 +245,13 @@ pre code {
    MOBILE OPTIMIZATION
 ============================ */
 @media (max-width: 600px) {
-
+	.float-right-code {
+        float: none;
+        display: block;
+        width: 100%;
+        margin: 0 auto 15px auto;
+    }
+    
 	.about-img {
     width: 100% !important;
     max-width: 100% !important;
