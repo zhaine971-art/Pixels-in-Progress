@@ -267,7 +267,7 @@ pre code {
        SECTION HEADERS — FIXED ORDER
     ============================ */
 
-    /* Stack the two headers vertically */
+    /* Stack vertically */
     .dual-section-header {
         flex-direction: column;
         align-items: flex-start;
@@ -275,22 +275,22 @@ pre code {
         margin: 30px 0 15px 0;
     }
 
-    /* Force correct stacking order */
+    /* Force correct order */
     .section-header.left {
-        order: 1; /* Latest Posts first */
+        order: 1; /* Latest Posts FIRST */
         flex: none;
         width: 100%;
         justify-content: flex-start;
     }
 
     .section-header.right {
-        order: 2; /* Spotlight second */
+        order: 2; /* Spotlight SECOND */
         flex: none;
         width: 100%;
         justify-content: flex-start;
     }
 
-    /* Remove horizontal lines on mobile */
+    /* Remove horizontal lines */
     .section-header.left::after,
     .section-header.right::after {
         display: none;
@@ -334,5 +334,3 @@ pre code {
         max-width: 100%;
     }
 }
-
-
