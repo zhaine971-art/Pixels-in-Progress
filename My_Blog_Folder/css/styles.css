@@ -220,6 +220,13 @@ pre code {
     line-height: 1.4;
 }
 
+.about-img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto; 
+}
+
 /* ============================
    MOBILE OPTIMIZATION
 ============================ */
