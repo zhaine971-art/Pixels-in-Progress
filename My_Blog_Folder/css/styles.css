@@ -227,7 +227,7 @@ pre code {
 
     /* BACKGROUND FIX */
     body {
-        background-attachment: scroll; /* fixes mobile jitter */
+        background-attachment: scroll;
         background-size: cover;
         background-position: center;
     }
@@ -267,33 +267,32 @@ pre code {
        SECTION HEADERS — FIXED ORDER
     ============================ */
 
-    /* Stack vertically */
     .dual-section-header {
-        flex-direction: column;
+        flex-direction: column !important;
         align-items: flex-start;
         gap: 15px;
         margin: 30px 0 15px 0;
     }
 
-    /* Force correct order */
+    /* FORCE ORDER — THESE ARE THE IMPORTANT LINES */
     .section-header.left {
-        order: 1; /* Latest Posts FIRST */
-        flex: none;
-        width: 100%;
-        justify-content: flex-start;
+        order: 1 !important;   /* Latest Posts FIRST */
+        flex: none !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
     }
 
     .section-header.right {
-        order: 2; /* Spotlight SECOND */
-        flex: none;
-        width: 100%;
-        justify-content: flex-start;
+        order: 2 !important;   /* Spotlight SECOND */
+        flex: none !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
     }
 
     /* Remove horizontal lines */
     .section-header.left::after,
     .section-header.right::after {
-        display: none;
+        display: none !important;
     }
 
     .section-header span {
