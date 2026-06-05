@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up – Pixels in Progress</title>
+
+    <meta name="description" content="Create an account on Pixels in Progress.">
+    <meta name="keywords" content="signup, account, programming blog">
+    <meta name="author" content="Zach">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<header>
+    <div class="banner">
+        <img src="images/banner2.jpg" alt="Pixels in Progress Banner">
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="posts.html">Posts</a>
+        <a href="legal.html">Legal</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<main>
+<div class="content-container">
+
+    <h1>Create an Account</h1>
+
+    <p>Join the journey! Create an account to comment on posts and follow updates.</p>
+
+    <form id="signup-form" style="max-width: 400px; margin: 0 auto;">
+        <label>Email</label>
+        <input type="email" id="signup-email" required
+               style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+
+        <label>Password</label>
+        <input type="password" id="signup-password" required
+               style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+
+        <button type="submit"
+                style="width: 100%; padding: 10px; background-color: black; color: white; border: none; border-radius: 6px; cursor: pointer;">
+            Sign Up
+        </button>
+    </form>
+
+    <p id="signup-message" style="text-align: center; margin-top: 15px; font-weight: bold;"></p>
+
+    <p style="text-align: center; margin-top: 20px;">
+        Already have an account? <a href="login.html">Log in here</a>.
+    </p>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Pixels in Progress</p>
+    <p>Sharing my journey from beginner to developer.</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="posts.html">Posts</a>
+        <a href="legal.html">Legal</a>
+    </nav>
+</footer>
+
+</main>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+
+<!-- Signup Logic -->
+<script>
+    const form = document.getElementById("signup-form");
+    const message = document.getElementById("signup-message");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password
+        });
+
+        if (error) {
+            message.textContent = "Error: " + error.message;
+            message.style.color = "red";
+        } else {
+            message.textContent = "Signup successful! Check your email to confirm your account.";
+            message.style.color = "green";
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -36,7 +36,6 @@ footer nav a {
     text-decoration: none;
 }
 
-
 /* ============================
    NAVIGATION
 ============================ */
@@ -98,15 +97,13 @@ nav a:hover::after {
     padding: 20px;
     background-color: rgba(159, 200, 255, 0.95);
     border-radius: 10px;
-}
-.content-container h1 {
-    text-align: center;
+    overflow: hidden; /* NEW — prevents code blocks from escaping */
 }
 
+.content-container h1,
 .content-container h2 {
     text-align: center;
 }
-
 
 main {
     padding: 40px 20px;
@@ -224,39 +221,49 @@ figure img {
 ============================ */
 .float-right-code {
     float: right;
-    width: 45%;                /* keeps it compact */
-    margin: 5px 0 15px 20px;   /* space between text and code */
+    width: 45%;
+    margin: 5px 0 15px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-
 /* ============================
-   CODE BLOCKS
+   CODE BLOCKS (FULLY FIXED)
 ============================ */
 pre {
     margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
     clear: both;
-    width: fit-content;
+    width: 100%;
     max-width: 100%;
+    overflow-x: auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Prevent floating code blocks from affecting normal ones */
+pre:not(.float-right-code) {
+    float: none !important;
 }
 
 pre code {
     display: block;
     background-color: #1e1e1e;
     color: #dcdcdc;
-    padding: 5px;
+    padding: 10px;
     border-radius: 8px;
     font-family: Consolas, monospace;
     font-size: 0.9rem;
-    max-width: 600px;
-    overflow-x: auto;
+    width: 100%;
+    box-sizing: border-box;
     white-space: pre;
     line-height: 1.4;
 }
 
+/* ============================
+   ABOUT IMAGE
+============================ */
 .about-img {
     width: 400px;
     height: auto;
@@ -265,32 +272,30 @@ pre code {
     border-radius: 8px;
 }
 
-
 /* ============================
    MOBILE OPTIMIZATION
 ============================ */
 @media (max-width: 600px) {
-	.float-right-code {
+
+    .float-right-code {
         float: none;
         display: block;
         width: 100%;
         margin: 0 auto 15px auto;
     }
 
-	.about-img {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-	}
+    .about-img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
 
-    /* BACKGROUND FIX */
     body {
         background-attachment: scroll;
         background-size: cover;
         background-position: center;
     }
 
-    /* NAV */
     nav {
         gap: 20px;
     }
@@ -300,7 +305,6 @@ pre code {
         padding-bottom: 3px;
     }
 
-    /* BANNER */
     .banner {
         height: 220px;
     }
@@ -311,19 +315,15 @@ pre code {
         object-fit: cover;
     }
 
-    /* CONTENT */
     .content-container {
         padding: 15px;
         border-radius: 8px;
+        overflow: hidden; /* ensure containment on mobile too */
     }
 
     main {
         padding: 20px 10px;
     }
-
-    /* ============================
-       SECTION HEADERS — FIXED ORDER
-    ============================ */
 
     .dual-section-header {
         flex-direction: column !important;
@@ -332,22 +332,20 @@ pre code {
         margin: 30px 0 15px 0;
     }
 
-    /* FORCE ORDER — THESE ARE THE IMPORTANT LINES */
     .section-header.left {
-        order: 1 !important;   /* Latest Posts FIRST */
+        order: 1 !important;
         flex: none !important;
         width: 100% !important;
         justify-content: flex-start !important;
     }
 
     .section-header.right {
-        order: 2 !important;   /* Spotlight SECOND */
+        order: 2 !important;
         flex: none !important;
         width: 100% !important;
         justify-content: flex-start !important;
     }
 
-    /* Remove horizontal lines */
     .section-header.left::after,
     .section-header.right::after {
         display: none !important;
@@ -358,9 +356,6 @@ pre code {
         padding: 6px 12px;
     }
 
-    /* ============================
-       POSTS + SPOTLIGHT CONTENT
-    ============================ */
     .posts-spotlight-wrapper {
         flex-direction: column;
         gap: 25px;
@@ -371,7 +366,6 @@ pre code {
         height: 60px;
     }
 
-    /* FLOATING IMAGES */
     .float-left {
         float: none;
         display: block;
@@ -379,15 +373,17 @@ pre code {
         width: 90%;
     }
 
-    /* CODE BLOCKS */
+    /* MOBILE CODE BLOCK FIX */
     pre {
         width: 100%;
         max-width: 100%;
         overflow-x: auto;
+        float: none !important;
     }
 
     pre code {
         font-size: 0.8rem;
+        width: 100%;
         max-width: 100%;
     }
 }
