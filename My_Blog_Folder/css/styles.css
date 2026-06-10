@@ -97,7 +97,7 @@ nav a:hover::after {
     padding: 20px;
     background-color: rgba(159, 200, 255, 0.95);
     border-radius: 10px;
-    overflow: hidden; /* NEW — prevents code blocks from escaping */
+    overflow: hidden;
 }
 
 .content-container h1,
@@ -171,12 +171,17 @@ figure img {
     gap: 40px;
 }
 
-.latest-posts {
-    flex: 1;
+/* FORCE BOTH COLUMNS TO BE EQUAL WIDTH */
+.latest-posts,
+.spotlight-content {
+    flex: 1 1 50%;
 }
 
+/* ALIGN SPOTLIGHT CONTENT PROPERLY */
 .spotlight-content {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 /* ============================
@@ -242,7 +247,6 @@ pre {
     box-sizing: border-box;
 }
 
-/* Prevent floating code blocks from affecting normal ones */
 pre:not(.float-right-code) {
     float: none !important;
 }
@@ -318,7 +322,7 @@ pre code {
     .content-container {
         padding: 15px;
         border-radius: 8px;
-        overflow: hidden; /* ensure containment on mobile too */
+        overflow: hidden;
     }
 
     main {
@@ -373,7 +377,6 @@ pre code {
         width: 90%;
     }
 
-    /* MOBILE CODE BLOCK FIX */
     pre {
         width: 100%;
         max-width: 100%;

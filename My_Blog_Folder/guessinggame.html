@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .game-box {
+            background: rgba(255,255,255,0.9);
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        select, input {
+            padding: 10px;
+            font-size: 1rem;
+            margin: 10px 0;
+            width: 80%;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="banner">
+        <img src="images/banner2.jpg" alt="Pixels in Progress Banner">
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="posts.html">Posts</a>
+        <a href="legal.html">Legal</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<main>
+<div class="content-container">
+
+    <h1>Number Guessing Game</h1>
+
+    <div class="game-box">
+        <p>
+            Welcome to the Number Guessing Game!  
+            Choose a difficulty level and try to guess the number within 5 attempts.
+        </p>
+
+        <label for="difficulty">Select Difficulty:</label><br>
+        <select id="difficulty">
+            <option value="easy">Easy (1–10)</option>
+            <option value="medium">Medium (1–50)</option>
+            <option value="hard">Hard (1–100)</option>
+        </select>
+
+        <br><br>
+
+        <button id="startBtn">Start Game</button>
+
+        <div id="gameArea" style="display:none;">
+            <p id="rangeText"></p>
+            <input type="number" id="guessInput" placeholder="Enter your guess">
+            <button id="guessBtn">Submit Guess</button>
+
+            <p id="result"></p>
+            <p id="attempts"></p>
+        </div>
+    </div>
+
+</div>
+</main>
+
+<script>
+    let randomNumber = 0;
+    let attempts = 0;
+    let maxAttempts = 5;
+    let maxRange = 10;
+
+    const startBtn = document.getElementById("startBtn");
+    const guessBtn = document.getElementById("guessBtn");
+    const gameArea = document.getElementById("gameArea");
+    const result = document.getElementById("result");
+    const attemptsText = document.getElementById("attempts");
+    const rangeText = document.getElementById("rangeText");
+
+    startBtn.addEventListener("click", () => {
+        const difficulty = document.getElementById("difficulty").value;
+
+        if (difficulty === "easy") maxRange = 10;
+        if (difficulty === "medium") maxRange = 50;
+        if (difficulty === "hard") maxRange = 100;
+
+        randomNumber = Math.floor(Math.random() * maxRange) + 1;
+        attempts = 0;
+
+        rangeText.textContent = `Guess a number between 1 and ${maxRange}`;
+        attemptsText.textContent = `Attempts: ${attempts}/${maxAttempts}`;
+        result.textContent = "";
+
+        gameArea.style.display = "block";
+    });
+
+    guessBtn.addEventListener("click", () => {
+        const guess = Number(document.getElementById("guessInput").value);
+        if (!guess) return;
+
+        attempts++;
+
+        if (guess === randomNumber) {
+            result.textContent = "You guessed the correct number!";
+            attemptsText.textContent = "";
+            return;
+        }
+
+        if (attempts >= maxAttempts) {
+            result.textContent = `Try again! The number was ${randomNumber}`;
+            attemptsText.textContent = "";
+            return;
+        }
+
+        result.textContent = "Incorrect guess!";
+        attemptsText.textContent = `Attempts: ${attempts}/${maxAttempts}`;
+    });
+</script>
+
+</body>
+</html>

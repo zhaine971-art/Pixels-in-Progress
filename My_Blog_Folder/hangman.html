@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hangman Game - Pixels in Progress</title>
+
+    <meta name="description" content="Play my Hangman game built in JavaScript.">
+    <meta name="keywords" content="hangman, javascript, game, coding project">
+    <meta name="author" content="Zach">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Hangman Game - Pixels in Progress">
+    <meta property="og:description" content="Play my Hangman game built in JavaScript.">
+    <meta property="og:type" content="article">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hangman Game - Pixels in Progress">
+    <meta name="twitter:description" content="Play my Hangman game built in JavaScript.">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Your existing site CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Hangman-specific styling -->
+    <style>
+        .hangman-wrapper {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #placeholder {
+            font-size: 2rem;
+            letter-spacing: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #lives {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        #guessInput {
+            padding: 8px;
+            font-size: 1rem;
+            width: 60px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #guessBtn {
+            padding: 8px 16px;
+            font-size: 1rem;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        pre#logo {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="banner">
+        <img src="images/banner2.jpg" alt="Pixels in Progress Banner">
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="posts.html">Posts</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<main>
+    <div class="content-container">
+
+        <article class="hangman-wrapper">
+            <h2>Hangman Game</h2>
+            <p><em>Built in JavaScript based on my Python version</em></p>
+
+            <pre id="logo">HANGMAN</pre>
+
+            <p id="placeholder"></p>
+            <p id="lives"></p>
+            <p id="message"></p>
+
+            <input id="guessInput" type="text" maxlength="1" placeholder="Letter">
+            <button id="guessBtn">Guess</button>
+        </article>
+
+        <footer>
+            <p>&copy; 2026 Pixel and Progress</p>
+            <p>Sharing my journey from beginner to developer.</p>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="posts.html">Posts</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </footer>
+
+    </div>
+</main>
+
+<!-- Hangman Game Script -->
+<script>
+const logo = `
+ _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \\ / _\` | '_ \\ / _\` | '_ \` _ \\ / _\` | '_ \\ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|
+                    __/ |                      
+|___/    
+`;
+
+
+    const stages = [
+`  +---+
+  |   |
+  O   |
+ /|\\  |
+ / \\  |
+      |
+=========
+`,
+`  +---+
+  |   |
+  O   |
+ /|\\  |
+ /    |
+      |
+=========
+`,
+`  +---+
+  |   |
+  O   |
+ /|\\  |
+      |
+      |
+=========
+`,
+`  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========
+`,
+`  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+`,
+`  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+`,
+`  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+`
+];
+
+    const wordList = [
+        "apple", "banana", "orange", "grape", "peach", "melon", "berry", "mango", "lemon", "lime",
+        "chair", "table", "couch", "shelf", "drawer", "window", "curtain", "pillow", "blanket", "lamp",
+        "dog", "cat", "horse", "sheep", "goat", "tiger", "lion", "zebra", "monkey", "rabbit",
+        "cloud", "storm", "rain", "thunder", "lightning", "breeze", "tornado", "hurricane", "sunshine", "shadow",
+        "river", "ocean", "forest", "desert", "island", "mountain", "valley", "canyon", "meadow", "jungle",
+        "pizza", "burger", "taco", "pasta", "salad", "cookie", "donut", "candy", "cheese", "butter",
+        "robot", "engine", "rocket", "planet", "galaxy", "comet", "asteroid", "spaceship", "gravity", "orbit",
+        "wizard", "dragon", "castle", "knight", "sword", "shield", "magic", "potion", "goblin", "treasure",
+        "phone", "keyboard", "screen", "mouse", "battery", "camera", "speaker", "charger", "router", "tablet"
+    ];
+
+    document.getElementById("logo").textContent = logo + "\n" + stages[6];
+
+    let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+    let lives = 6;
+    let guessedLetters = [];
+    let placeholder = Array(randomWord.length).fill("_");
+    let gameOver = false;
+
+    document.getElementById("placeholder").textContent = placeholder.join("");
+    document.getElementById("lives").textContent = `Lives: ${lives}`;
+
+    document.getElementById("guessBtn").addEventListener("click", () => {
+        if (gameOver) return;
+
+        const input = document.getElementById("guessInput");
+        const guess = input.value.toLowerCase();
+        input.value = "";
+
+        if (!guess.match(/[a-z]/i)) return;
+        if (guessedLetters.includes(guess)) {
+            document.getElementById("message").textContent = "You already guessed that letter!";
+            return;
+        }
+
+        guessedLetters.push(guess);
+
+        if (randomWord.includes(guess)) {
+            for (let i = 0; i < randomWord.length; i++) {
+                if (randomWord[i] === guess) {
+                    placeholder[i] = guess;
+                }
+            }
+        } else {
+            lives--;
+            document.getElementById("message").textContent = "Wrong guess!";
+        }
+
+        document.getElementById("placeholder").textContent = placeholder.join("");
+        document.getElementById("lives").textContent = `Lives: ${lives}`;
+
+        // EXACTLY like Python: stages[lives]
+        document.getElementById("logo").textContent = logo + "\n" + stages[lives];
+
+        if (lives === 0) {
+            gameOver = true;
+            document.getElementById("message").textContent = `You lose! The word was: ${randomWord}`;
+        }
+
+        if (placeholder.join("") === randomWord) {
+            gameOver = true;
+            document.getElementById("message").textContent = "You win!";
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

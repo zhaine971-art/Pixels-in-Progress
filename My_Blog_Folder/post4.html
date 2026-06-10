@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page Title -->
+    <title>100 Days of Python - Days 6 and 7 - Pixels in Progress</title>
+
+    <!-- SEO Description -->
+    <meta name="description" content="My Day 6-7 progress in the 100 Days of Python course, covering functions, while loops, and solving Reeborg's World challenges.">
+
+    <!-- Optional Keywords -->
+    <meta name="keywords" content="blog, programming, tutorials, tech, game dev">
+
+    <!-- Author + Robots -->
+    <meta name="author" content="Zach">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Social Sharing) -->
+    <meta property="og:title" content="100 Days of Python – Day 6 Progress - Pixels in Progress">
+    <meta property="og:description" content="My Day 6-7 progress in the 100 Days of Python course, covering functions, while loops, and solving Reeborg's World challenges.">
+    <meta property="og:type" content="article">
+    <!-- Optional: Add a thumbnail later -->
+    <!-- <meta property="og:image" content="images/post-thumbnail.jpg"> -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="100 Days of Python - Days 6 and 7 - Pixels in Progress">
+    <meta name="twitter:description" content="My Day 6-7 progress in the 100 Days of Python course, covering functions, while loops, and solving Reeborg's World challenges.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<header>
+    <div class="banner">
+        <img src="images/banner2.jpg" alt="Pixels in Progress Banner">
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="posts.html">Posts</a>
+        <a href="contact.html">Contact</a>
+	<a href="login.html">Login</a>
+    </nav>
+</header>
+
+<main>
+    <div class="content-container">
+
+        <article>
+            <h2>100 Days of Python - Days 6 and 7</h2>
+            <p><em>Posted on June 9th 2026</em></p>
+
+            <!-- FLOATING IMAGE (optional) -->
+            <!-- Replace the src with your image file -->
+            <!-- Remove this entire <img> line if you don't want an image -->
+            <img src="images/hangman.png" class="float-left" alt="Post image">
+
+            <p>
+                Day 6 was a good one. After the mental workout of learning loops for the first time, today felt a lot more manageable. The lesson focused on defining your own functions and getting more familiar with the built‑in Python functions we’ve already been using, like <code>len()</code>. There are a ton of built‑ins out there, and it’s starting to feel like Python has a tool for almost everything if you just know where to look.
+            </p>
+
+            <p>
+                Writing your own function is pretty simple on the surface. You type <code>def function_name():</code> and indent whatever you want that function to do. The indentation rules are the same ones we’ve been following with <code>if</code> statements and loops. What I liked about today is that functions finally started to feel useful, not just something the instructor told us to learn. They make your code cleaner, easier to read, and way easier to reuse.
+            </p>
+
+            <p>
+                We also covered <code>while</code> loops and how they differ from <code>for</code> loops. The best way I can describe it is this: a <code>for</code> loop runs a set number of times, almost like following a checklist. A <code>while</code> loop keeps going until something changes, which makes it great for situations where you don’t know how many repetitions you’ll need. Both loops have their place, and learning when to use each one is part of getting comfortable with Python.
+            </p>
+
+            <p>
+                After that, the instructor introduced a site called 
+                <a href="https://reeborg.ca/reeborg.html?lang=en&mode=python&menu=worlds%2Fmenus%2Freeborg_intro_en.json&name=Maze&url=worlds%2Ftutorial_en%2Fmaze1.json" target="_blank">Reeborg's World</a>. 
+                It’s a little robot you control with Python, and it turned out to be a fun way to practice everything from loops to functions. We went through all the hurdle challenges, and the final one was a maze. I managed to get through all of them without too much trouble, but I definitely wrote more code than I needed to. That seems to be a habit of mine. I solve the problem, but then I look at the instructor’s solution and think, “Oh… that’s way cleaner.” It’s not a bad thing though. It just means I’m still learning how to think more efficiently.
+            </p>
+
+            <figure>
+                <img src="images/Reeborg's-World.png" alt="A screenshot of Reeborg's World" width="700">
+                <figcaption>A screenshot of Reeborg's World</figcaption>
+            </figure>
+
+            <p>
+                Overall, Day 6 was solid. Nothing felt overwhelming, and it was nice to have a day where things clicked without the usual confusion. I’m still learning, still making mistakes, and still writing more lines than I probably need to, but that’s part of the process. Every day adds a little more confidence, and I’m excited to keep going.
+            </p>
+
+
+
+            <!-- CODE BLOCK (optional) -->
+            <!-- Make sure your code starts at the far left (no indentation) -->
+            <pre><code class="language-python">
+from random_word_list import word_list
+import random
+from hangman_art import logo, stages
+
+print(logo)
+print("Lets play some Hangman!")
+random_word = random.choice(word_list)
+
+game_over = False
+lives = 6
+placeholder = []
+guessed_letters = []
+word_length = len(random_word)
+
+# Create placeholder list of underscores
+for length in range(word_length):
+    placeholder.append("_")
+
+print("".join(placeholder))
+
+while not game_over:
+    user_guess = input("Guess a letter to see if it's in the word!\n>> ").lower()
+
+    # Check if already guessed
+    if user_guess in guessed_letters:
+        print("You already guessed that letter dummy!\n")
+        continue
+    else:
+        guessed_letters.append(user_guess)
+
+    # Reveal letters
+    if user_guess in random_word:
+        for index, letter in enumerate(random_word):
+            if letter == user_guess:
+                placeholder[index] = user_guess
+    else:
+        lives -= 1
+        print("Wrong guess!\n")
+
+    # Check lose condition
+    if lives == 0:
+        print("You lose!\n")
+        print(f"The word was: {random_word}. Better luck next time!\n")
+        game_over = True
+
+    # Check win condition
+    if random_word == "".join(placeholder):
+        print("You win!\n")
+        game_over = True
+
+    # Print updated board
+    print("".join(placeholder))
+    print(f"You have {lives} lives left\n")
+    print(stages[lives])
+            </code></pre>
+
+            <p>
+                Day 7 was an interesting one. The entire lesson revolved around creating a Hangman game, and man, it took me a while to figure out. We didn’t really learn anything brand‑new; it was more about revisiting everything we’ve covered so far and finally putting it all into action. One thing I actually enjoyed was making my first flowchart. I never really thought about using them before, but once I saw how much they help keep your thoughts organized, I realized I’ll probably be using them a lot more moving forward.
+            </p>
+
+            <p>
+                I went through each step of Day 7 struggling pretty hard. It was frustrating because in my head, I felt like I should’ve been able to handle it with everything I’ve learned up to this point, but for some reason I just couldn’t get it to work. I couldn’t even figure out why it wasn’t working, which made it worse. I eventually looked at the solution and let the instructor walk through it, but honestly, that didn’t sit right with me. She always says that if we’re not struggling, we’re not learning and she’s right. The whole point of these exercises is to train your brain to think like a programmer. Even when you’re failing, you’re still building those problem‑solving muscles.
+            </p>
+
+            <p>
+                I spent a few hours trying to solve it on my own and still came up short. The last couple of sections I managed to finish mostly by myself, but by the end of the day I was just over it. I logged off feeling like I hadn’t made any real progress. The next morning, though, I opened a fresh PyCharm project and decided to start from scratch. I ended up working on Hangman for another two or three hours and this time, I actually finished it. I had to Google quite a bit, and I even discovered a new function I hadn’t used the night before: <code>enumerate()</code>. It returns both the index number and the letter when looping through a word, which made part of the logic way easier. I won’t go too deep into it here, but I’ve included my Hangman script above if you want to check it out.
+            </p>
+
+            <p>
+                The only thing I'd like to add is the code i'm providing is in no way the best way to code hangman. It was simply the way I did it as I stuggled through it. You can play it here <a href="hangman.html">Play Hangman</a>.
+
+            </p>
+
+            <!-- OPTIONAL FIGURE WITH CAPTION -->
+            <!--
+            <figure>
+                <img src="images/example.jpg" alt="Example image" width="300">
+                <figcaption>Your caption here.</figcaption>
+            </figure>
+            -->
+        </article>
+
+<footer>
+    <p>&copy; 2026 Pixel and Progress</p>
+    <p>Sharing my journey from beginner to developer.</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="posts.html">Posts</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</footer>
+</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+
+</body>
+</html>
